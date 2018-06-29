@@ -15,18 +15,26 @@ public class World {
 	}
 
 	// This creates a 2 dimensional array that holds Biomes in each place
-	Biomes[][] map;
+	private Biomes[][] map;
 	private static Biomes[][] mapVis;
 
 	public World(int xSize, int ySize) {
 		Biomes[][] worldMap = new Biomes[xSize][ySize];
-		map = worldMap;
+		this.map = worldMap;
 		System.out.println("World Size Succsefuly Initialized!");
 		generateMap();
+	}
+	
+	public World() {
+		
 	}
 
 	// This Begins to generate the actual map of the world by creating a "start
 	// biome"
+	public void manualConstructMap() {
+		
+	}
+	
 	public void generateMap() {
 		// This will create the world via multiplication table generation algorithm
 		Random startBiome = new Random();
@@ -37,47 +45,47 @@ public class World {
 		// This switch statement will choose what biome will be created first.
 		switch (startBiome.nextInt(7)) {
 		case 0:
-			map[0][0] = new Tundra();
+			this.map[0][0] = new Tundra();
 
 			break;
 		case 1:
-			map[0][0] = new Tundra();
+			this.map[0][0] = new Tundra();
 
 		case 2:
-			map[0][0] = new Taiga();
+			this.map[0][0] = new Taiga();
 			break;
 
 		case 3:
-			map[0][0] = new TemperateDeciduousForest();
+			this.map[0][0] = new TemperateDeciduousForest();
 
 			break;
 
 		case 4:
-			map[0][0] = new TropicalRainforest();
+			this.map[0][0] = new TropicalRainforest();
 
 			break;
 
 		case 5:
-			map[0][0] = new Savanna();
+			this.map[0][0] = new Savanna();
 
 			break;
 
 		case 6:
-			map[0][0] = new Grasslands();
+			this.map[0][0] = new Grasslands();
 
 			break;
 		case 7:
-			map[0][0] = new Dessert();
+			this.map[0][0] = new Dessert();
 
 			break;
 		default:
 			break;
 		}
 
-		map[0][0].getBiome();
+		this.map[0][0].getBiome();
 
-		for (int x = 0; x < map.length; x++) {
-			for (int y = 0; y < map[x].length; y++) {
+		for (int x = 0; x < this.map.length; x++) {
+			for (int y = 0; y < this.map[x].length; y++) {
 				int nextInt = upDownGen.nextInt(3);
 				// This if statement will decide how the map's biomes will change temperature
 				// hence changing what biome shows up next
@@ -91,24 +99,24 @@ public class World {
 				// This if statement will actually manipulate the selected biome based on the
 				// surrounding biome's
 				// Temperatures
-				if (tempChange == genTemperatureChange.Up && y != 0 && x != 0 && map[x - 1][y - 1] != null) {
-					newBiomeTemp = map[x - 1][y - 1].getType() + 1; // create setType method for Biomes
+				if (tempChange == genTemperatureChange.Up && y != 0 && x != 0 && this.map[x - 1][y - 1] != null) {
+					newBiomeTemp = this.map[x - 1][y - 1].getType() + 1; // create setType method for Biomes
 					createBiome(newBiomeTemp, x, y);
 
-				} else if (tempChange == genTemperatureChange.Down && y != 0 && x != 0 && map[x - 1][y - 1] != null) {
-					newBiomeTemp = map[x - 1][y - 1].getType() - 1; // create setType method for Biomes
+				} else if (tempChange == genTemperatureChange.Down && y != 0 && x != 0 && this.map[x - 1][y - 1] != null) {
+					newBiomeTemp = this.map[x - 1][y - 1].getType() - 1; // create setType method for Biomes
 					createBiome(newBiomeTemp, x, y);
-				} else if (tempChange == genTemperatureChange.Stay && y != 0 && x != 0 && map[x - 1][y - 1] != null) {
-					newBiomeTemp = map[x - 1][y - 1].getType(); // create setType method for Biomes
+				} else if (tempChange == genTemperatureChange.Stay && y != 0 && x != 0 && this.map[x - 1][y - 1] != null) {
+					newBiomeTemp = this.map[x - 1][y - 1].getType(); // create setType method for Biomes
 					createBiome(newBiomeTemp, x, y);
-				} else if (tempChange == genTemperatureChange.Up && y == 0 && x != 0 && map[x - 1][y] != null) {
-					newBiomeTemp = map[x - 1][y].getType() + 1; // create setType method for Biomes
+				} else if (tempChange == genTemperatureChange.Up && y == 0 && x != 0 && this.map[x - 1][y] != null) {
+					newBiomeTemp = this.map[x - 1][y].getType() + 1; // create setType method for Biomes
 					createBiome(newBiomeTemp, x, y);
-				} else if (tempChange == genTemperatureChange.Down && y == 0 && x != 0 && map[x - 1][y] != null) {
-					newBiomeTemp = map[x - 1][y].getType() - 1; // create setType method for Biomes
+				} else if (tempChange == genTemperatureChange.Down && y == 0 && x != 0 && this.map[x - 1][y] != null) {
+					newBiomeTemp = this.map[x - 1][y].getType() - 1; // create setType method for Biomes
 					createBiome(newBiomeTemp, x, y);
-				} else if (tempChange == genTemperatureChange.Stay && y == 0 && x != 0 && map[x - 1][y] != null) {
-					newBiomeTemp = map[x - 1][y].getType(); // create setType method for Biomes
+				} else if (tempChange == genTemperatureChange.Stay && y == 0 && x != 0 && this.map[x - 1][y] != null) {
+					newBiomeTemp = this.map[x - 1][y].getType(); // create setType method for Biomes
 					createBiome(newBiomeTemp, x, y);
 				} else if (tempChange == genTemperatureChange.Up && y == 0 && x == 0) {
 					newBiomeTemp = 1; // create setType method for Biomes
@@ -119,16 +127,16 @@ public class World {
 				} else if (tempChange == genTemperatureChange.Stay && y == 0 && x == 0) {
 					newBiomeTemp = 1; // create setType method for Biomes
 					createBiome(newBiomeTemp, x, y);
-				} else if (tempChange == genTemperatureChange.Down && y != 0 && x == 0 && map[x][y - 1] != null) {
-					newBiomeTemp = map[x][y - 1].getType() - 1;
+				} else if (tempChange == genTemperatureChange.Down && y != 0 && x == 0 && this.map[x][y - 1] != null) {
+					newBiomeTemp = this.map[x][y - 1].getType() - 1;
 					createBiome(newBiomeTemp, x, y);
 
-				} else if (tempChange == genTemperatureChange.Stay && y != 0 && x == 0 && map[x][y - 1] != null) {
-					newBiomeTemp = map[0][0].getType();
+				} else if (tempChange == genTemperatureChange.Stay && y != 0 && x == 0 && this.map[x][y - 1] != null) {
+					newBiomeTemp = this.map[0][0].getType();
 					createBiome(newBiomeTemp, x, y);
 
-				} else if (tempChange == genTemperatureChange.Up && y != 0 && x == 0 && map[x][y - 1] != null) {
-					newBiomeTemp = map[x][y - 1].getType() + 1;
+				} else if (tempChange == genTemperatureChange.Up && y != 0 && x == 0 && this.map[x][y - 1] != null) {
+					newBiomeTemp = this.map[x][y - 1].getType() + 1;
 					createBiome(newBiomeTemp, x, y);
 
 				} /*
@@ -157,9 +165,9 @@ public class World {
 	}
 
 	public void testMap() {
-		for (int x = 0; x < map.length; x++) {
-			for (int y = 0; y < map[x].length; y++) {
-				if (map[x][y] == null) {
+		for (int x = 0; x < this.map.length; x++) {
+			for (int y = 0; y < this.map[x].length; y++) {
+				if (this.map[x][y] == null) {
 					System.out.println("Missing Biome");
 				}
 			}
@@ -168,11 +176,11 @@ public class World {
 
 	public void showMap() {
 		int typeNumber = 0;
-		for (int x = 0; x < map.length; x++) {
-			for (int y = 0; y < map[x].length; y++) {
+		for (int x = 0; x < this.map.length; x++) {
+			for (int y = 0; y < this.map[x].length; y++) {
 				char charNum = 0;
-				if (map[x][y] != null) {
-					typeNumber = map[x][y].getType();
+				if (this.map[x][y] != null) {
+					typeNumber = this.map[x][y].getType();
 				} else {
 
 					Random upDownGen = new Random();
@@ -190,27 +198,27 @@ public class World {
 					// This if statement will actually manipulate the selected biome based on the
 					// surrounding biome's
 					// Temperatures
-					if (tempChange == genTemperatureChange.Up && y != 0 && x != 0 && map[x - 1][y - 1] != null) {
-						newBiomeTemp = map[x - 1][y - 1].getType() + 1; // create setType method for Biomes
+					if (tempChange == genTemperatureChange.Up && y != 0 && x != 0 && this.map[x - 1][y - 1] != null) {
+						newBiomeTemp = this.map[x - 1][y - 1].getType() + 1; // create setType method for Biomes
 						createBiome(newBiomeTemp, x, y);
 
 					} else if (tempChange == genTemperatureChange.Down && y != 0 && x != 0
-							&& map[x - 1][y - 1] != null) {
-						newBiomeTemp = map[x - 1][y - 1].getType() - 1; // create setType method for Biomes
+							&& this.map[x - 1][y - 1] != null) {
+						newBiomeTemp = this.map[x - 1][y - 1].getType() - 1; // create setType method for Biomes
 						createBiome(newBiomeTemp, x, y);
 					} else if (tempChange == genTemperatureChange.Stay && y != 0 && x != 0
-							&& map[x - 1][y - 1] != null) {
-						newBiomeTemp = map[x - 1][y - 1].getType() + upDownGen.nextInt(2) - upDownGen.nextInt(2);
+							&& this.map[x - 1][y - 1] != null) {
+						newBiomeTemp = this.map[x - 1][y - 1].getType() + upDownGen.nextInt(2) - upDownGen.nextInt(2);
 						; // create setType method for Biomes
 						createBiome(newBiomeTemp, x, y);
-					} else if (tempChange == genTemperatureChange.Up && y == 0 && x != 0 && map[x - 1][y] != null) {
-						newBiomeTemp = map[x - 1][y].getType() + 1; // create setType method for Biomes
+					} else if (tempChange == genTemperatureChange.Up && y == 0 && x != 0 && this.map[x - 1][y] != null) {
+						newBiomeTemp = this.map[x - 1][y].getType() + 1; // create setType method for Biomes
 						createBiome(newBiomeTemp, x, y);
-					} else if (tempChange == genTemperatureChange.Down && y == 0 && x != 0 && map[x - 1][y] != null) {
-						newBiomeTemp = map[x - 1][y].getType() - 1; // create setType method for Biomes
+					} else if (tempChange == genTemperatureChange.Down && y == 0 && x != 0 && this.map[x - 1][y] != null) {
+						newBiomeTemp = this.map[x - 1][y].getType() - 1; // create setType method for Biomes
 						createBiome(newBiomeTemp, x, y);
-					} else if (tempChange == genTemperatureChange.Stay && y == 0 && x != 0 && map[x - 1][y] != null) {
-						newBiomeTemp = map[x - 1][y].getType() + upDownGen.nextInt(2) - upDownGen.nextInt(2);
+					} else if (tempChange == genTemperatureChange.Stay && y == 0 && x != 0 && this.map[x - 1][y] != null) {
+						newBiomeTemp = this.map[x - 1][y].getType() + upDownGen.nextInt(2) - upDownGen.nextInt(2);
 						; // create setType method for Biomes
 						createBiome(newBiomeTemp, x, y);
 					} else if (tempChange == genTemperatureChange.Up && y == 0 && x == 0) {
@@ -222,16 +230,16 @@ public class World {
 					} else if (tempChange == genTemperatureChange.Stay && y == 0 && x == 0) {
 						newBiomeTemp = 1; // create setType method for Biomes
 						createBiome(newBiomeTemp, x, y);
-					} else if (tempChange == genTemperatureChange.Down && y != 0 && x == 0 && map[x][y - 1] != null) {
-						newBiomeTemp = map[x][y - 1].getType() - 1;
+					} else if (tempChange == genTemperatureChange.Down && y != 0 && x == 0 && this.map[x][y - 1] != null) {
+						newBiomeTemp = this.map[x][y - 1].getType() - 1;
 						createBiome(newBiomeTemp, x, y);
 
-					} else if (tempChange == genTemperatureChange.Stay && y != 0 && x == 0 && map[x][y - 1] != null) {
-						newBiomeTemp = map[0][0].getType() + upDownGen.nextInt(2) - upDownGen.nextInt(2);
+					} else if (tempChange == genTemperatureChange.Stay && y != 0 && x == 0 && this.map[x][y - 1] != null) {
+						newBiomeTemp = this.map[0][0].getType() + upDownGen.nextInt(2) - upDownGen.nextInt(2);
 						createBiome(newBiomeTemp, x, y);
 
-					} else if (tempChange == genTemperatureChange.Up && y != 0 && x == 0 && map[x][y - 1] != null) {
-						newBiomeTemp = map[x][y - 1].getType() + 1;
+					} else if (tempChange == genTemperatureChange.Up && y != 0 && x == 0 && this.map[x][y - 1] != null) {
+						newBiomeTemp = this.map[x][y - 1].getType() + 1;
 						createBiome(newBiomeTemp, x, y);
 
 					}
@@ -275,25 +283,25 @@ public class World {
 	public void createBiome(int newBiomeTemp, int x, int y) {
 		switch (newBiomeTemp) {
 		case 1:
-			map[x][y] = new Tundra();
+			this.map[x][y] = new Tundra();
 			break;
 		case 2:
-			map[x][y] = new Taiga();
+			this.map[x][y] = new Taiga();
 			break;
 		case 3:
-			map[x][y] = new TemperateDeciduousForest();
+			this.map[x][y] = new TemperateDeciduousForest();
 			break;
 		case 4:
-			map[x][y] = new TropicalRainforest();
+			this.map[x][y] = new TropicalRainforest();
 			break;
 		case 5:
-			map[x][y] = new Savanna();
+			this.map[x][y] = new Savanna();
 			break;
 		case 6:
 			map[x][y] = new Grasslands();
 			break;
 		case 7:
-			map[x][y] = new Dessert();
+			this.map[x][y] = new Dessert();
 			break;
 		default:
 			break;
@@ -301,7 +309,7 @@ public class World {
 	}
 
 	public void getBiome(int x, int y) {
-		switch (map[x][y].getType()) {
+		switch (this.map[x][y].getType()) {
 		case 0:
 			System.out.println("Nothing...");
 			break;

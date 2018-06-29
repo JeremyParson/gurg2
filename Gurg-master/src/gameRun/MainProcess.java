@@ -1,6 +1,8 @@
 package gameRun;
 
 import java.util.Scanner;
+
+import Worlds.Seonugus;
 import gameManager.World;
 
 public class MainProcess {
@@ -31,7 +33,7 @@ public class MainProcess {
 			int x = ioScanner.nextInt();
 			System.out.println("Set Map y size");
 			int y = ioScanner.nextInt();
-			World newWorld = new World(x,y);//createNewWorld(x, y);
+			Seonugus newWorld = new Seonugus(x,y);//createNewWorld(x, y);
 			newWorld.showMap();
 			break;
 
